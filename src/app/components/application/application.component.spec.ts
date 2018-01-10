@@ -1,20 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistrationComponent } from './registration.component';
+import { ApplicationComponent } from './application.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { StoreService } from '../services/store.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RegistrationService, RetailerService, WindowService, CountryService, StateService } from '../services';
+import { RegistrationService, RetailerService, CountryService, StateService } from '../../services';
 import { NgPipesModule } from 'ngx-pipes';
 import { MyDatePickerModule } from 'mydatepicker';
-import { APP_CONFIG, AppConfigModule } from '../config';
+import { APP_CONFIG, AppConfigModule } from '../../config';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CountrySelectComponent } from '../directives/country-select/country-select.component';
-import { SerialModalComponent } from '../directives/serial-modal.component/serial-modal.component';
 
-describe('RegistrationComponent', () => {
+describe('ApplicationComponent', () => {
 
 
   const registrationSvcMock = jasmine.createSpyObj('RegistrationService', ['post']);
@@ -56,12 +53,12 @@ describe('RegistrationComponent', () => {
     }
   };
 
-  let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
+  let component: ApplicationComponent;
+  let fixture: ComponentFixture<ApplicationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegistrationComponent, CountrySelectComponent, SerialModalComponent],
+      declarations: [ApplicationComponent],
       imports: [
         AppConfigModule,
         FormsModule,
@@ -74,8 +71,6 @@ describe('RegistrationComponent', () => {
       ],
       providers: [
         FormBuilder,
-        WindowService,
-        StoreService,
         {provide: RegistrationService, useValue: registrationSvcMock},
         {provide: RetailerService, useValue: retailerSvcMock},
         {provide: CountryService, useValue: countrySvcMock},
@@ -91,7 +86,7 @@ describe('RegistrationComponent', () => {
 
   beforeEach(() => {
 
-    fixture = TestBed.createComponent(RegistrationComponent);
+    fixture = TestBed.createComponent(ApplicationComponent);
     component = fixture.componentInstance;
 
   });
@@ -106,7 +101,7 @@ describe('RegistrationComponent', () => {
 
   describe('onSubmit', () => {
 
-    it('should set registration Error to true when registration fails', done => {
+    it('should set application Error to true when application fails', done => {
      registrationSvcMock.post.and.callFake(() => Promise.reject(''));
 
       component.onSubmit(registrationFormMock)

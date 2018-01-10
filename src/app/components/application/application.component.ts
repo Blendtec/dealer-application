@@ -3,26 +3,25 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/throw';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OtherPurchasePlaceValidator, RecaptchaValidator } from '../validators';
+import { OtherPurchasePlaceValidator, RecaptchaValidator } from '../../validators';
 import {
   RetailerService,
   CountryService,
   StateService,
   RegistrationService,
-  StoreService
-} from '../services';
-import { RegistrationCommand, ICountry } from '../models';
-import { APP_CONFIG, AppConfig } from '../config';
-import { StatesValidator } from '../validators/has-states.validator';
+} from '../../services';
+import { RegistrationCommand, ICountry } from '../../models';
+import { APP_CONFIG, AppConfig } from '../../config';
+import { StatesValidator } from '../../validators/has-states.validator';
 import { Subject } from 'rxjs/Subject';
 
 
 @Component({
   selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  templateUrl: './application.component.html',
+  styleUrls: ['./application.component.css']
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class ApplicationComponent implements OnInit, OnDestroy {
 
   public registrationError = false;
   public registrationDone = false;
@@ -38,8 +37,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public captchaKey: string;
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(private storeService: StoreService,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private registrationService: RegistrationService,
               private countryService: CountryService,
               private stateService: StateService,
@@ -59,10 +57,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe.next();
-  }
-
-  registrationComplete(): void {
-    this.storeService.passState('done');
   }
 
   private createForm(): void {
@@ -119,7 +113,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .then(() => {
         this.registrationDone = true;
         this.registration.reset();
-        this.registrationComplete();
       })
       .catch(() => {
         this.registrationError = true;

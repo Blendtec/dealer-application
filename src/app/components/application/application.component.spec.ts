@@ -1,24 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistrationComponent } from './registration.component';
+import { ApplicationComponent } from './application.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { StoreService } from '../services/store.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RegistrationService, RetailerService, WindowService, CountryService, StateService } from '../services';
+import { ApiService, CountryService, StateService } from '../../services';
 import { NgPipesModule } from 'ngx-pipes';
 import { MyDatePickerModule } from 'mydatepicker';
-import { APP_CONFIG, AppConfigModule } from '../config';
+import { APP_CONFIG, AppConfigModule } from '../../config';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CountrySelectComponent } from '../directives/country-select/country-select.component';
-import { SerialModalComponent } from '../directives/serial-modal.component/serial-modal.component';
 
-describe('RegistrationComponent', () => {
+describe('ApplicationComponent', () => {
 
 
-  const registrationSvcMock = jasmine.createSpyObj('RegistrationService', ['post']);
-  registrationSvcMock.post.and.returnValue(Promise.resolve());
+  const applicationSvcMock = jasmine.createSpyObj('ApiService', ['post']);
+  applicationSvcMock.post.and.returnValue(Promise.resolve());
 
   const stateSvcMock = jasmine.createSpyObj('StateService', ['getAll$']);
   stateSvcMock.getAll$.and.returnValue(Promise.resolve());
@@ -26,10 +23,7 @@ describe('RegistrationComponent', () => {
   const countrySvcMock = jasmine.createSpyObj('CountryService', ['getAll$']);
   countrySvcMock.getAll$.and.returnValue(Promise.resolve());
 
-  const retailerSvcMock = jasmine.createSpyObj('RetailerService', ['getAll$']);
-  retailerSvcMock.getAll$.and.returnValue(Promise.resolve());
-
-  const registrationFormMock = {
+  const applicationFormMock = {
     value: {
       firstName: '',
       lastName: '',
@@ -56,12 +50,12 @@ describe('RegistrationComponent', () => {
     }
   };
 
-  let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
+  let component: ApplicationComponent;
+  let fixture: ComponentFixture<ApplicationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegistrationComponent, CountrySelectComponent, SerialModalComponent],
+      declarations: [ApplicationComponent],
       imports: [
         AppConfigModule,
         FormsModule,
@@ -74,10 +68,7 @@ describe('RegistrationComponent', () => {
       ],
       providers: [
         FormBuilder,
-        WindowService,
-        StoreService,
-        {provide: RegistrationService, useValue: registrationSvcMock},
-        {provide: RetailerService, useValue: retailerSvcMock},
+        {provide: ApiService, useValue: applicationSvcMock},
         {provide: CountryService, useValue: countrySvcMock},
         {provide: StateService, useValue: stateSvcMock},
         {provide: TranslateService, useValue: {} },
@@ -91,7 +82,7 @@ describe('RegistrationComponent', () => {
 
   beforeEach(() => {
 
-    fixture = TestBed.createComponent(RegistrationComponent);
+    fixture = TestBed.createComponent(ApplicationComponent);
     component = fixture.componentInstance;
 
   });
@@ -106,12 +97,12 @@ describe('RegistrationComponent', () => {
 
   describe('onSubmit', () => {
 
-    it('should set registration Error to true when registration fails', done => {
-     registrationSvcMock.post.and.callFake(() => Promise.reject(''));
+    it('should set application Error to true when application fails', done => {
+     applicationSvcMock.post.and.callFake(() => Promise.reject(''));
 
-      component.onSubmit(registrationFormMock)
+      component.onSubmit(applicationFormMock)
         .then(() => {
-          expect(component.registrationError).toBe(true);
+          expect(component.submitError).toBe(true);
           done();
         });
     });

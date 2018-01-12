@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { RegistrationService } from './registration.service';
 import { AppConfigModule } from '../config';
-import { TranslateService } from '@ngx-translate/core';
+import { ApiService } from './api.service';
 
 
-describe('RegistrationService', () => {
+describe('ApiService', () => {
 
-  let requestService: RegistrationService;
+  let requestService: ApiService;
   let httpMock: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,11 +16,11 @@ describe('RegistrationService', () => {
         AppConfigModule,
       ],
       providers: [
-        RegistrationService
+        ApiService
       ]
     });
 
-    requestService = TestBed.get(RegistrationService);
+    requestService = TestBed.get(ApiService);
     httpMock = TestBed.get(HttpTestingController);
   });
 

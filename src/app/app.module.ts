@@ -4,13 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ApplicationComponent } from './components';
 import { AppRoutingModule } from './app-routing.module';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { RegistrationService } from './services/registration.service';
+import { ApiService } from './services/api.service';
 import { CountryService } from './services/country.service';
-import { RetailerService } from './services/retailer.service';
 import { MyDatePickerModule } from 'mydatepicker';
 import { StateService } from './services/state.service';
 import { NgPipesModule } from 'ngx-pipes';
@@ -20,6 +19,7 @@ import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppConfig } from './config/models/app-config.interface';
 import { APP_CONFIG } from './config/app-config.module';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   return new TranslateHttpLoader(http, `${config.assets}/i18n/`, '.json');
@@ -35,9 +35,9 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
     MyDatePickerModule,
+    NgxErrorsModule,
     NgHttpLoaderModule,
     NgPipesModule,
     ReactiveFormsModule,
@@ -51,9 +51,8 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
     })
   ],
   providers: [
-    RegistrationService,
+    ApiService,
     CountryService,
-    RetailerService,
     FormBuilder,
     StateService,
     TranslatePipe],

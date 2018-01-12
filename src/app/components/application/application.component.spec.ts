@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { HttpClientModule } from '@angular/common/http';
-import { RegistrationService, RetailerService, CountryService, StateService } from '../../services';
+import { ApiService, CountryService, StateService } from '../../services';
 import { NgPipesModule } from 'ngx-pipes';
 import { MyDatePickerModule } from 'mydatepicker';
 import { APP_CONFIG, AppConfigModule } from '../../config';
@@ -14,8 +14,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 describe('ApplicationComponent', () => {
 
 
-  const registrationSvcMock = jasmine.createSpyObj('RegistrationService', ['post']);
-  registrationSvcMock.post.and.returnValue(Promise.resolve());
+  const applicationSvcMock = jasmine.createSpyObj('ApiService', ['post']);
+  applicationSvcMock.post.and.returnValue(Promise.resolve());
 
   const stateSvcMock = jasmine.createSpyObj('StateService', ['getAll$']);
   stateSvcMock.getAll$.and.returnValue(Promise.resolve());
@@ -23,10 +23,7 @@ describe('ApplicationComponent', () => {
   const countrySvcMock = jasmine.createSpyObj('CountryService', ['getAll$']);
   countrySvcMock.getAll$.and.returnValue(Promise.resolve());
 
-  const retailerSvcMock = jasmine.createSpyObj('RetailerService', ['getAll$']);
-  retailerSvcMock.getAll$.and.returnValue(Promise.resolve());
-
-  const registrationFormMock = {
+  const applicationFormMock = {
     value: {
       firstName: '',
       lastName: '',
@@ -71,8 +68,7 @@ describe('ApplicationComponent', () => {
       ],
       providers: [
         FormBuilder,
-        {provide: RegistrationService, useValue: registrationSvcMock},
-        {provide: RetailerService, useValue: retailerSvcMock},
+        {provide: ApiService, useValue: applicationSvcMock},
         {provide: CountryService, useValue: countrySvcMock},
         {provide: StateService, useValue: stateSvcMock},
         {provide: TranslateService, useValue: {} },
@@ -102,11 +98,11 @@ describe('ApplicationComponent', () => {
   describe('onSubmit', () => {
 
     it('should set application Error to true when application fails', done => {
-     registrationSvcMock.post.and.callFake(() => Promise.reject(''));
+     applicationSvcMock.post.and.callFake(() => Promise.reject(''));
 
-      component.onSubmit(registrationFormMock)
+      component.onSubmit(applicationFormMock)
         .then(() => {
-          expect(component.registrationError).toBe(true);
+          expect(component.submitError).toBe(true);
           done();
         });
     });

@@ -1,10 +1,8 @@
 export interface IAddress {
-  one: string;
-  two: string;
+  name: string;
+  address: string;
   city: string;
   stateProvince: string;
   zip: string;
   country: string;
-  email: string;
-  phone: string;
 }

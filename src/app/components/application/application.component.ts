@@ -4,7 +4,7 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/throw';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecaptchaValidator } from '../../validators';
-import { CountryService, StateService, ApiService }from '../../services';
+import { CountryService, StateService, ApiService } from '../../services';
 import { ICountry } from '../../models';
 import { APP_CONFIG, AppConfig } from '../../config';
 import { StatesValidator } from '../../validators/has-states.validator';
@@ -174,19 +174,9 @@ export class ApplicationComponent extends BaseComponent implements OnDestroy {
     return getTouchedControlsValidationErrors(this.form.controls).length;
   }
 
-
-
-
-  public onSubmit(formData: any): Promise<void> {
+  public onSubmit(formData: any): Promise<any> {
     return this.apiService.post(new ApplicationCommand(formData.value))
-      .then(() => {
-        this.form.reset();
-      })
-      .catch(() => {
-        this.submitError= true;
-      });
-  }
+      .then(() => this.form.reset())
+      .catch(() => this.submitError = true);
+   }
 }
-
-
-

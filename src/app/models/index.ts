@@ -7,7 +7,7 @@ export * from './business.interface';
 export * from './website.interface';
 export * from './social.interface';
 export * from './sales.interface';
-export * from './social-channel.interface'
+export * from './social-channel.interface';
 export * from './fulfillment.interface';
 export * from './differentiators.interface';
 export * from './other.interface';

@@ -3,5 +3,5 @@ export interface IFulfillment {
   other: string;
   thirdPartyName: string;
   thirdPartyLocation: string;
-  directToStore: boolean
+  directToStore: boolean;
 }

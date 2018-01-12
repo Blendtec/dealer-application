@@ -1,4 +1,4 @@
 export interface ISocialChannel {
-  url:string;
+  url: string;
   count: number;
 }

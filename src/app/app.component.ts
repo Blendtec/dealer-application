@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StoreService } from './services';
-import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs/Subject';
 
@@ -16,16 +14,13 @@ export class AppComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  constructor(private storeService: StoreService, private translate: TranslateService) {
+  constructor(private translate: TranslateService) {
   }
 
   ngOnInit() {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
 
-    this.storeService.retrieveState$
-      .takeUntil(this.destroy$)
-      .subscribe(data => this.appState = data);
   }
 
   ngOnDestroy() {

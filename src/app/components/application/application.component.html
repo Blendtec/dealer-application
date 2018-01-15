@@ -1,0 +1,717 @@
+<div class="grid--full text-max-width">
+  <div class="registration-form form-vertical">
+    <h1>{{'HEADING.BECOME_A_DEALER' | translate}}</h1>
+    <p>{{'CONTENT.THANK_YOU' | translate}}</p>
+    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form" class="animate-floating-labels">
+      <div class="errors" *ngIf="getErrorCount() > 0">
+        <ul>
+          <li
+            *ngIf="form.get('contact.firstName').hasError('required') && form.get('contact.firstName').touched">
+            {{'VALIDATION.REQUIRED_CONTACT_FIRSTNAME' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('contact.lastName').hasError('required') && form.get('contact.lastName').touched">
+            {{'VALIDATION.REQUIRED_CONTACT_LASTNAME' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('contact.title').hasError('required') && form.get('contact.title').touched">
+            {{'VALIDATION.REQUIRED_CONTACT_TITLE' | translate}}
+          </li>
+          <li
+            *ngIf="(form.get('contact.email').hasError('email') || form.get('contact.email').hasError('required')) && form.get('contact.email').touched">
+            {{'VALIDATION.VALID_CONTACT_EMAIL' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('contact.phone').hasError('required') && form.get('contact.phone').touched">
+            {{'VALIDATION.REQUIRED_CONTACT_PHONE' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('contact.individual').hasError('required') && form.get('contact.individual').touched">
+            {{'VALIDATION.REQUIRED_CONTACT_INDIVIDUAL' | translate}}
+          </li>
+          <li *ngIf="form.get('company.name').hasError('required') && form.get('company.name').touched">
+            {{'VALIDATION.REQUIRED_COMPANY_NAME' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.name').hasError('required') && form.get('shippingAddress.name').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_NAME' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.address').hasError('required') && form.get('shippingAddress.address').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_ADDRESS' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.city').hasError('required') && form.get('shippingAddress.city').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_CITY' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.stateProvince').hasError('required') && form.get('shippingAddress.stateProvince').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_STATE' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.zip').hasError('required') && form.get('shippingAddress.zip').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_ZIP' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('shippingAddress.country').hasError('required') && form.get('shippingAddress.country').touched">
+            {{'VALIDATION.REQUIRED_SHIPPING_ADDRESS_COUNTRY' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.name').hasError('required') && form.get('billingAddress.name').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_NAME' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.address').hasError('required') && form.get('billingAddress.address').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_ADDRESS' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.city').hasError('required') && form.get('billingAddress.city').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_CITY' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.stateProvince').hasError('required') && form.get('billingAddress.stateProvince').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_STATE' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.zip').hasError('required') && form.get('billingAddress.zip').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_ZIP' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('billingAddress.country').hasError('required') && form.get('billingAddress.country').touched">
+            {{'VALIDATION.REQUIRED_BILLING_ADDRESS_COUNTRY' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('business.license').hasError('required') && form.get('business.license').touched">
+            {{'VALIDATION.REQUIRED_BUSINESS_LICENSE' | translate}}
+          </li>
+          <li
+            *ngIf="form.get('business.state').hasError('required') && form.get('business.state').touched">
+            {{'VALIDATION.REQUIRED_BUSINESS_STATE' | translate}}
+          </li>
+          <li *ngIf="form.get('website.url').hasError('required') && form.get('website.url').touched">
+            {{'VALIDATION.REQUIRED_WEBSITE_URL' | translate}}
+          </li>
+
+          <li *ngIf="submitError">{{'ERROR.SUBMISSION_FAILED' | translate}}</li>
+        </ul>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.CONTACT' | translate}}</h3>
+        <div formGroupName="contact">
+
+          <div class="grid">
+            <div class="grid__item medium--one-third large--one-third">
+              <label class="hidden-label">{{'LABEL.CONTACT_FIRST_NAME' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_FIRST_NAME' | translate}}" type="text"
+                     [ngClass]="{error: form.get('contact.firstName').hasError('required') && form.get('contact.firstName').touched}"
+                     formControlName="firstName">
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+              <label class="hidden-label">{{'LABEL.CONTACT_LAST_NAME' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_LAST_NAME' | translate}}" type="text"
+                     [ngClass]="{error: form.get('contact.lastName').hasError('required') && form.get('contact.lastName').touched}"
+                     formControlName="lastName">
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+              <label class="hidden-label">{{'LABEL.CONTACT_TITLE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_TITLE' | translate}}" type="text"
+                     [ngClass]="{error: form.get('contact.title').hasError('required') && form.get('contact.title').touched}"
+                     formControlName="title">
+            </div>
+
+          </div>
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-third large--one-third">
+              <label class="hidden-label">{{'LABEL.CONTACT_EMAIL' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_EMAIL' | translate}}" type="text"
+                     [ngClass]="{error: (form.get('contact.email').hasError('required') || form.get('contact.email').hasError('email')) && form.get('contact.email').touched}"
+                     formControlName="email">
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.CONTACT_PHONE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_PHONE' | translate}}" type="text"
+                     [ngClass]="{error: form.get('contact.phone').hasError('required') && form.get('contact.phone').touched}"
+                     formControlName="phone">
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.CONTACT_INDIVIDUAL' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.CONTACT_INDIVIDUAL' | translate}}" type="text"
+                     [ngClass]="{error: form.get('contact.individual').hasError('required') && form.get('contact.individual').touched}"
+                     formControlName="individual">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.COMPANY' | translate}}</h3>
+        <div formGroupName="company">
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.COMPANY_NAME' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.COMPANY_NAME' | translate}}" type="text"
+                     [ngClass]="{error: form.get('company.name').hasError('required') && form.get('company.name').touched}"
+                     formControlName="name">
+
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.COMPANY_DBAS' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.COMPANY_DBAS' | translate}}" type="text"
+                     formControlName="dbas">
+
+            </div>
+
+          </div>
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.COMPANY_PHONE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.COMPANY_PHONE' | translate}}" type="text"
+                     formControlName="phone">
+
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.COMPANY_FAX' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.COMPANY_FAX' | translate}}" type="text"
+                     [ngClass]="{error: form.get('company.fax').hasError('required') && form.get('company.fax').touched}"
+                     formControlName="fax">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.SHIPPING' | translate}}</h3>
+        <div formGroupName="shippingAddress">
+
+          <label class="hidden-label">{{'LABEL.SHIPPING_NAME' | translate}}</label>
+          <input class="input-full" placeholder="{{'LABEL.SHIPPING_NAME' | translate}}" type="text"
+                 [ngClass]="{error: form.get('shippingAddress.name').hasError('required') && form.get('shippingAddress.name').touched}"
+                 formControlName="name">
+
+          <label class="hidden-label">{{'LABEL.SHIPPING_ADDRESS' | translate}}</label>
+          <input class="input-full" placeholder="{{'LABEL.SHIPPING_ADDRESS' | translate}}" type="text"
+                 [ngClass]="{error: form.get('shippingAddress.address').hasError('required') && form.get('shippingAddress.address').touched}"
+                 formControlName="address">
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.SHIPPING_CITY' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.SHIPPING_CITY' | translate}}" type="text"
+                     [ngClass]="{error: form.get('shippingAddress.city').hasError('required') && form.get('shippingAddress.city').touched}"
+                     formControlName="city">
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.SHIPPING_STATE' | translate}}</label>
+              <select class="input-full"
+                      [ngClass]="{error: form.get('shippingAddress.stateProvince').hasError('required') && form.get('shippingAddress.stateProvince').touched}"
+                      formControlName="stateProvince">
+                <option value="">{{'OPTION.SHIPPING_STATE' | translate}}</option>
+                <option
+                  *ngFor="let state of states$ | async | filterBy: ['country']: this.form.get('shippingAddress.country').value"
+                  [disabled]="states$?.length > 0" [ngValue]="state.name">
+                  {{state.name}}
+                </option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.SHIPPING_ZIP' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.SHIPPING_ZIP' | translate}}" type="text"
+                     [ngClass]="{error: form.get('shippingAddress.zip').hasError('required') && form.get('shippingAddress.zip').touched}"
+                     formControlName="zip">
+
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.SHIPPING.COUNTRY' | translate}}</label>
+              <select class="input-full"
+                      [ngClass]="{error: form.get('shippingAddress.country').hasError('required') && form.get('shippingAddress.country').touched}"
+                      formControlName="country">
+                <option value="">{{'OPTION.SHIPPING.COUNTRY' | translate}}</option>
+                <option *ngFor="let country of countries$ | async" [ngValue]="country.code">
+                  {{country.name}}
+                </option>
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.BILLING' | translate}}</h3>
+        <div formGroupName="billingAddress">
+
+          <label class="hidden-label">{{'LABEL.BILLING_NAME' | translate}}</label>
+          <input class="input-full" placeholder="{{'LABEL.BILLING_NAME' | translate}}" type="text"
+                 [ngClass]="{error: form.get('billingAddress.name').hasError('required') && form.get('billingAddress.name').touched}"
+                 formControlName="name">
+
+          <label class="hidden-label">{{'LABEL.BILLING_ADDRESS' | translate}}</label>
+          <input class="input-full" placeholder="{{'LABEL.BILLING_ADDRESS' | translate}}" type="text"
+                 [ngClass]="{error: form.get('billingAddress.address').hasError('required') && form.get('billingAddress.address').touched}"
+                 formControlName="address">
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.BILLING_CITY' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.BILLING_CITY' | translate}}" type="text"
+                     [ngClass]="{error: form.get('billingAddress.city').hasError('required') && form.get('billingAddress.city').touched}"
+                     formControlName="city">
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.BILLING_STATE' | translate}}</label>
+              <select class="input-full"
+                      [ngClass]="{error: form.get('billingAddress.stateProvince').hasError('required') && form.get('billingAddress.stateProvince').touched}"
+                      formControlName="stateProvince">
+                <option value="">{{'OPTION.BILLING_STATE' | translate}}</option>
+                <option
+                  *ngFor="let state of states$ | async | filterBy: ['country']: this.form.get('billingAddress.country').value"
+                  [disabled]="states$?.length > 0" [ngValue]="state.name">
+                  {{state.name}}
+                </option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.BILLING_ZIP' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.BILLING_ZIP' | translate}}" type="text"
+                     [ngClass]="{error: form.get('billingAddress.zip').hasError('required') && form.get('billingAddress.zip').touched}"
+                     formControlName="zip">
+
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+
+              <label class="hidden-label">{{'LABEL.BILLING.COUNTRY' | translate}}</label>
+              <select class="input-full"
+                      [ngClass]="{error: form.get('billingAddress.country').hasError('required') && form.get('billingAddress.country').touched}"
+                      formControlName="country">
+                <option value="">{{'OPTION.BILLING.COUNTRY' | translate}}</option>
+                <option *ngFor="let country of countries$ | async" [ngValue]="country.code">
+                  {{country.name}}
+                </option>
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.BUSINESS' | translate}}</h3>
+        <div formGroupName="business">
+          <div class="grid">
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.BUSINESS_LICENSE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.BUSINESS_LICENSE' | translate}}" type="text"
+                     [ngClass]="{error: form.get('business.license').hasError('required') && form.get('business.license').touched}"
+                     formControlName="license">
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.BUSINESS_STATE' | translate}}</label>
+              <select class="input-full"
+                      [ngClass]="{error: form.get('business.state').hasError('required') && form.get('business.state').touched}"
+                      formControlName="state">
+                <option value="">{{'OPTION.BUSINESS_STATE' | translate}}</option>
+                <option
+                  *ngFor="let state of states$ | async | filterBy: ['country']: 'US'"
+                  [disabled]="states$?.length > 0" [ngValue]="state.name">
+                  {{state.name}}
+                </option>
+              </select>
+
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.BUSINESS_TAXEXEMPT_NUM' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.BUSINESS_TAXEXEMPT_NUM' | translate}}" type="text"
+                     formControlName="taxExemptNum">
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.WEBSITE' | translate}}</h3>
+        <div formGroupName="website">
+          <div class="grid">
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.WEBSITE_URL' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.WEBSITE_URL' | translate}}" type="text"
+                     [ngClass]="{error: form.get('website.url').hasError('required') && form.get('website.url').touched}"
+                     formControlName="url">
+
+
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+              <label>{{'LABEL.WEBSITE_DATE' | translate}}</label>
+              <my-date-picker class="input-full" name="date" [options]="dateOptions"
+                              [ngClass]="{error: form.get('website.date').hasError('required') && form.get('website.date').touched}"
+                              formControlName="date"></my-date-picker>
+            </div>
+
+            <div class="grid__item medium--one-third large--one-third">
+
+              <label class="hidden-label">{{'LABEL.WEBSITE_VISITS' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.WEBSITE_VISITS' | translate}}" type="number"
+                     [ngClass]="{error: form.get('website.visits').hasError('required') && form.get('website.visits').touched}"
+                     formControlName="visits">
+            </div>
+
+
+          </div>
+
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.WEBSITE_CONVERSION_RATE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.WEBSITE_CONVERSION_RATE' | translate}}" type="number"
+                     [ngClass]="{error: form.get('website.conversionRate').hasError('required') && form.get('website.conversionRate').touched}"
+                     formControlName="conversionRate">
+            </div>
+
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.WEBSITE_REVENUE' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.WEBSITE_REVENUE' | translate}}" type="number"
+                     [ngClass]="{error: form.get('website.revenue').hasError('required') && form.get('website.revenue').touched}"
+                     formControlName="revenue">
+            </div>
+
+          </div>
+          <div class="grid">
+            <div class="grid__item">
+              <label class="hidden-label">{{'LABEL.WEBSITE_TOOLS' | translate}}</label>
+              <textarea class="input-full" placeholder="{{'LABEL.WEBSITE_TOOLS' | translate}}" type="text"
+                        formControlName="tools"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+
+        <div formGroupName="social">
+          <h3>{{'HEADING.SOCIAL' | translate}}</h3>
+          <p>{{'CONTENT.SOCIAL_COUNT' | translate}}</p>
+          <div class="grid">
+            <div formGroupName="facebook">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.FACEBOOK_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.FACEBOOK_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.facebook.url').hasError('required') && form.get('social.facebook.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.FACEBOOK_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.FACEBOOK_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.facebook.count').hasError('required') && form.get('social.facebook.count').touched}"
+                       formControlName="count">
+
+              </div>
+            </div>
+
+
+          </div>
+          <div class="grid">
+            <div formGroupName="pinterest">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.PINTEREST_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.PINTEREST_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.pinterest.url').hasError('required') && form.get('social.facebook.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.PINTEREST_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.PINTEREST_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.pinterest.count').hasError('required') && form.get('social.pinterest.count').touched}"
+                       formControlName="count">
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="grid">
+            <div formGroupName="twitter">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.TWITTER_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.TWITTER_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.twitter.url').hasError('required') && form.get('social.twitter.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.TWITTER_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.TWITTER_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.twitter.count').hasError('required') && form.get('social.twitter.count').touched}"
+                       formControlName="count">
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="grid">
+            <div formGroupName="instagram">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.INSTAGRAM_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.INSTAGRAM_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.instagram.url').hasError('required') && form.get('social.instagram.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.INSTAGRAM_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.INSTAGRAM_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.instagram.count').hasError('required') && form.get('social.instagram.count').touched}"
+                       formControlName="count">
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="grid">
+            <div formGroupName="googlePlus">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.GOOGLE_PLUS_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.GOOGLE_PLUS_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.googlePlus.url').hasError('required') && form.get('social.googlePlus.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.GOOGLE_PLUS_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.GOOGLE_PLUS_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.googlePlus.count').hasError('required') && form.get('social.googlePlus.count').touched}"
+                       formControlName="count">
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="grid">
+            <div formGroupName="blog">
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.BLOG_URL' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.BLOG_URL' | translate}}" type="text"
+                       [ngClass]="{error: form.get('social.blog.url').hasError('required') && form.get('social.blog.url').touched}"
+                       formControlName="url">
+
+              </div>
+
+              <div class="grid__item medium--one-half large--one-half">
+
+                <label class="hidden-label">{{'LABEL.BLOG_COUNT' | translate}}</label>
+                <input class="input-full" placeholder="{{'LABEL.BLOG_COUNT' | translate}}" type="number"
+                       [ngClass]="{error: form.get('social.blog.count').hasError('required') && form.get('social.blog.count').touched}"
+                       formControlName="count">
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.SALES' | translate}}</h3>
+        <div formGroupName="sales">
+
+          <label class="hidden-label">{{'LABEL.SALES_CHANNELS' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.SALES_CHANNELS' | translate}}" type="text"
+                    formControlName="channels"></textarea>
+          <input type="checkbox" formControlName="amazon">
+          <label class="inline">{{'LABEL.SALES_AMAZON_SELLER' | translate}}</label>
+
+          <label class="hidden-label">{{'LABEL.SALES_AMAZON_NAMES' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.SALES_AMAZON_NAMES' | translate}}"
+                    formControlName="amazonNames"></textarea>
+
+          <input type="checkbox" formControlName="demos">
+          <label class="inline">{{'LABEL.SALES_DEMOS' | translate}}</label>
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.FULFILLMENT' | translate}}</h3>
+        <div formGroupName="fulfillment">
+          <div class="grid">
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.FULFILLMENT_WAREHOUSE_LOCATION' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.FULFILLMENT_WAREHOUSE_LOCATION' | translate}}" type="text"
+                     formControlName="warehouseLocation">
+            </div>
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.FULFILLMENT_OTHER' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.FULFILLMENT_OTHER' | translate}}" type="text"
+                     formControlName="other">
+            </div>
+          </div>
+          <div class="grid">
+
+            <div class="grid__item medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.FULFILLMENT_3PNAME' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.FULFILLMENT_3PNAME' | translate}}" type="text"
+                     formControlName="thirdPartyName">
+
+            </div>
+
+            <div class="grid__item small--one-half medium--one-half large--one-half">
+              <label class="hidden-label">{{'LABEL.FULFILLMENT_3PLOCATION' | translate}}</label>
+              <input class="input-full" placeholder="{{'LABEL.FULFILLMENT_3PLOCATION' | translate}}" type="text"
+                     formControlName="thirdPartyLocation">
+            </div>
+          </div>
+
+          <input type="checkbox" formControlName="directToStore">
+          <label class="inline">{{'LABEL.FULFILLMENT_DIRECTTOSTORE' | translate}}</label>
+
+        </div>
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.DIFFERENTIATORS' | translate}}</h3>
+        <div formGroupName="differentiators">
+          <label class="hidden-label">{{'LABEL.DIFFERENTIATORS_HOW' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.DIFFERENTIATORS_HOW' | translate}}"
+                    [ngClass]="{error: form.get('differentiators.how').hasError('required') && form.get('differentiators.how').touched}"
+                    formControlName="how"></textarea>
+
+          <label class="hidden-label">{{'LABEL.DIFFERENTIATORS_WHAT' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.DIFFERENTIATORS_WHAT' | translate}}"
+                    [ngClass]="{error: form.get('differentiators.what').hasError('required') && form.get('differentiators.what').touched}"
+                    formControlName="what"></textarea>
+
+          <label class="hidden-label">{{'LABEL.DIFFERENTIATORS_VALUE' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.DIFFERENTIATORS_VALUE' | translate}}"
+                    [ngClass]="{error: form.get('differentiators.value').hasError('required') && form.get('differentiators.value').touched}"
+                    formControlName="value"></textarea>
+
+        </div>
+
+      </div>
+      <hr/>
+      <div class="grid">
+        <h3>{{'HEADING.OTHER' | translate}}</h3>
+        <div formGroupName="other">
+          <label class="hidden-label">{{'LABEL.OTHER_PRODUCTS' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.OTHER_PRODUCTS' | translate}}"
+                    formControlName="products"></textarea>
+
+          <label class="hidden-label">{{'LABEL.OTHER_MARKETING' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.OTHER_MARKETING' | translate}}"
+                    formControlName="marketing"></textarea>
+
+          <label class="hidden-label">{{'LABEL.OTHER_LOCATIONS' | translate}}</label>
+          <textarea class="input-full" placeholder="{{'LABEL.OTHER_LOCATIONS' | translate}}"
+                    formControlName="locations"></textarea>
+        </div>
+
+
+      </div>
+      <hr/>
+      <div class="grid">
+        <div class="grid__item large--one-half">
+          <div class="captcha-input">
+            <re-captcha (resolved)="form.get('recaptcha').setValue($event)"
+                        siteKey="{{captchaKey}}"></re-captcha>
+          </div>
+        </div>
+        <div class="grid__item large--one-half">
+          <button id="registration-submit--btn" name="button" class="step__footer__continue-btn btn"
+                  [disabled]="form.invalid"
+                  type="submit">
+            {{'BUTTON.APPLY' | translate}}
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+

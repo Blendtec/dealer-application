@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  apiHost: 'https://www.blendtec.com',
-  registrationEndpoint: 'product_registrations/addApi',
-  bucket: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/registration',
+  apiHost: 'https://blendtec.mockable.io',
+  registrationEndpoint: 'dealerapp',
+  bucket: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application',
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
-  assets: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/registration/assets',
+  assets: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application/assets',
   captchaKey: '6LcWmzIUAAAAADoSNPMqAECfcdIl9Z8B4czc4MjP'
 };

@@ -32,7 +32,7 @@ after_success:
 - "./node_modules/.bin/codecov"
 notifications:
   slack: blendtec:a5Z5i4z3iuWbHHDdlMRSMkiB
-deploy
+deploy:
 - provider: s3
   region: us-west-1
   access_key_id: AMAZON_ACCESS_KEY_ID

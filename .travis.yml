@@ -35,9 +35,9 @@ notifications:
 deploy:
 - provider: s3
   region: us-west-1
-  access_key_id: AMAZON_ACCESS_KEY_ID
+  access_key_id: $AMAZON_ACCESS_KEY_ID
   secret_access_key:
-    secure: AMAZON_SECRET_ACCESS_KEY
+    secure: $AMAZON_SECRET_ACCESS_KEY
   bucket: recipe-client.blendtec.com
   local-dir: dist
   upload-dir: dealer-application
@@ -52,9 +52,9 @@ deploy:
     branch: master
 - provider: s3
   region: us-west-1
-  access_key_id: AMAZON_ACCESS_KEY_ID
+  access_key_id: $AMAZON_ACCESS_KEY_ID
   secret_access_key:
-    secure: AMAZON_SECRET_ACCESS_KEY
+    secure: $AMAZON_SECRET_ACCESS_KEY
   bucket: recipe-stage-client.blendtec.com
   local-dir: dist
   upload-dir: dealer-application

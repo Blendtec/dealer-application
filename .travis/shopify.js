@@ -8,6 +8,7 @@ var Shopify = new ShopifyAPI({
     shopify_api_key: process.env.SHOPIFY_API_KEY,
     access_token: process.env.SHOPIFY_API_PASSWORD
 });
+console.log('TESTING ENV', process.env.TESTER_WESTER);
 
 var indexPagePath = path.join(__dirname, "..", "dist", "index.html");
 fs.readFile(indexPagePath, "utf-8", function (err, data) {

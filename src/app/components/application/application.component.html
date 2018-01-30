@@ -1,6 +1,5 @@
 <div class="grid--full text-max-width">
   <div class="registration-form form-vertical">
-    <h1>{{'HEADING.BECOME_A_DEALER' | translate}}</h1>
     <p>{{'CONTENT.THANK_YOU' | translate}}</p>
     <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form" class="animate-floating-labels">
       <div class="errors" *ngIf="getErrorCount() > 0">

@@ -21,8 +21,8 @@ before_script:
 - export DBUS_SESSION_BUS_ADDRESS=/dev/null
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- chmod +x ./travis/deploy_stage.sh
-- chmod +x ./travis/deploy.sh
+- chmod +x $TRAVIS_BUILD_DIR/.travis/deploy_stage.sh
+- chmod +x $TRAVIS_BUILD_DIR/.travis/deploy.sh
 script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH

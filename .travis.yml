@@ -29,7 +29,7 @@ before_script:
 script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH
-- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/dealer-application/
+- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci $S3_STAGE_BUCKET/$APP_NAME/
   --base-href /pages/dealer-application-stage/; fi
 - if [ $TRAVIS_BRANCH = 'master' ]; then npm run build:ci https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application/
   --base-href /pages/dealer-application/; fi
@@ -69,6 +69,6 @@ deploy:
     branch: develop
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy_stage.sh https://s3-us-west-1.amazonaws.com/$S3_STAGE_BUCKET/dealer-application"
+  script: "./.travis/deploy_stage.sh $S3_STAGE_BUCKET/$APP_NAME"
   on:
     branch: develop

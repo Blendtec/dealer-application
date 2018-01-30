@@ -69,6 +69,6 @@ deploy:
     branch: develop
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy_stage.sh $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME
+  script: "./.travis/deploy_stage.sh $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME"
   on:
     branch: develop

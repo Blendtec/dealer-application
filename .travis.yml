@@ -29,10 +29,10 @@ before_script:
 script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH
-- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci $S3_STAGE_BUCKET/$APP_NAME/
-  --base-href /pages/dealer-application-stage/; fi
-- if [ $TRAVIS_BRANCH = 'master' ]; then npm run build:ci https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application/
-  --base-href /pages/dealer-application/; fi
+- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME/
+  --base-href /pages/$APP_NAME-stage/; fi
+- if [ $TRAVIS_BRANCH = 'master' ]; then npm run build:ci $S3_REGION/$S3_BUCKET/$APP_NAME/
+  --base-href /pages/$APP_NAME/; fi
 after_success:
 - "./node_modules/.bin/codecov"
 notifications:
@@ -43,16 +43,16 @@ deploy:
   access_key_id: $AMAZON_ACCESS_KEY_ID
   secret_access_key:
     secure: $AMAZON_SECRET_ACCESS_KEY
-  bucket: recipe-client.blendtec.com
+  bucket: $S3_BUCKET
   local-dir: dist
-  upload-dir: dealer-application
+  upload-dir: $APP_NAME
   skip_cleanup: true
   acl: public_read
   on:
     branch: master
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy.sh https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application"
+  script: "./.travis/deploy.sh $S3_REGION/$S3_BUCKET/$APP_NAME"
   on:
     branch: master
 - provider: s3
@@ -60,15 +60,15 @@ deploy:
   access_key_id: $AMAZON_ACCESS_KEY_ID
   secret_access_key:
     secure: $AMAZON_SECRET_ACCESS_KEY
-  bucket: recipe-stage-client.blendtec.com
+  bucket: $S3_STAGE_BUCKET
   local-dir: dist
-  upload-dir: dealer-application
+  upload-dir: $APP_NAME
   skip_cleanup: true
   acl: public_read
   on:
     branch: develop
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy_stage.sh $S3_STAGE_BUCKET/$APP_NAME"
+  script: "./.travis/deploy_stage.sh $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME
   on:
     branch: develop

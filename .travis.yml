@@ -4,8 +4,6 @@ git:
   depth: 1
 language: node_js
 node_js:
-- '6'
-- '7'
 - stable
 cache:
   directories:
@@ -24,19 +22,14 @@ before_script:
 - export DBUS_SESSION_BUS_ADDRESS=/dev/null
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- chmod +x $TRAVIS_BUILD_DIR/.travis/deploy_stage.sh
-- chmod +x $TRAVIS_BUILD_DIR/.travis/deploy.sh
 script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH
-- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME/
-  --base-href /pages/$APP_NAME-stage/; fi
-- if [ $TRAVIS_BRANCH = 'master' ]; then npm run build:ci $S3_REGION/$S3_BUCKET/$APP_NAME/
-  --base-href /pages/$APP_NAME/; fi
+- if [ $TRAVIS_BRANCH = 'master' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_BUCKET/$APP_NAME/; fi
+- if [ $TRAVIS_BRANCH = 'stage' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_STAGE_BUCKET/$APP_NAME/; fi
+- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_DEV_BUCKET/$APP_NAME/; fi
 after_success:
 - "./node_modules/.bin/codecov"
-notifications:
-  slack: blendtec:a5Z5i4z3iuWbHHDdlMRSMkiB
 deploy:
 - provider: s3
   region: us-west-1
@@ -52,9 +45,10 @@ deploy:
     branch: master
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy.sh $S3_REGION/$S3_BUCKET/$APP_NAME"
+  script: node ./.travis/shopify.js $SHOPIFY_SHOP $SHOPIFY_API_KEY $SHOPIFY_API_PASSWORD $SHOPIFY_PAGE_ID
   on:
     branch: master
+
 - provider: s3
   region: us-west-1
   access_key_id: $AMAZON_ACCESS_KEY_ID
@@ -66,9 +60,27 @@ deploy:
   skip_cleanup: true
   acl: public_read
   on:
+    branch: stage
+- provider: script
+  skip_cleanup: true
+  script: node ./.travis/shopify.js $SHOPIFY_STAGE_SHOP $SHOPIFY_STAGE_API_KEY $SHOPIFY_STAGE_API_PASSWORD $SHOPIFY_STAGE_PAGE_ID
+  on:
+    branch: stage
+
+- provider: s3
+  region: us-west-1
+  access_key_id: $AMAZON_ACCESS_KEY_ID
+  secret_access_key:
+    secure: $AMAZON_SECRET_ACCESS_KEY
+  bucket: $S3_DEV_BUCKET
+  local-dir: dist
+  upload-dir: $APP_NAME
+  skip_cleanup: true
+  acl: public_read
+  on:
     branch: develop
 - provider: script
   skip_cleanup: true
-  script: "./.travis/deploy_stage.sh $S3_STAGE_REGION/$S3_STAGE_BUCKET/$APP_NAME"
+  script: node ./.travis/shopify.js $SHOPIFY_DEV_SHOP $SHOPIFY_DEV_API_KEY $SHOPIFY_DEV_API_PASSWORD $SHOPIFY_DEV_PAGE_ID
   on:
     branch: develop

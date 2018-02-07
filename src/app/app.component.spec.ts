@@ -1,8 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
-
-import { AppComponent } from './app.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { AppComponent } from './app.component';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { ApplicationComponent } from './components/application/application.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +27,6 @@ describe('AppComponent', () => {
         ApplicationComponent
       ],
       imports: [
-        RouterModule.forRoot([]),
         NgHttpLoaderModule,
         FormsModule,
         ReactiveFormsModule,

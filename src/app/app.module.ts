@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ApplicationComponent } from './components';
-import { AppRoutingModule } from './app-routing.module';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,7 +18,6 @@ import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppConfig } from './config/models/app-config.interface';
 import { APP_CONFIG } from './config/app-config.module';
-import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   return new TranslateHttpLoader(http, `${config.assets}/i18n/`, '.json');
@@ -32,12 +30,10 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   ],
   imports: [
     AppConfigModule,
-    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MyDatePickerModule,
-    NgxErrorsModule,
     NgHttpLoaderModule,
     NgPipesModule,
     ReactiveFormsModule,

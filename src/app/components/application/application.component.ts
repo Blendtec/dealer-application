@@ -176,7 +176,12 @@ export class ApplicationComponent extends BaseComponent implements OnDestroy {
 
   public onSubmit(formData: any): Promise<any> {
     return this.apiService.post(new ApplicationCommand(formData.value))
-      .then(() => this.form.reset())
-      .catch(() => this.submitError = true);
+      .then((out) => {
+        this.form.reset();
+      })
+      .catch((out) => {
+        this.submitError = true;
+      });
    }
+
 }

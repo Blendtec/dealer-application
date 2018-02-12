@@ -420,7 +420,7 @@
 
             <div class="grid__item medium--one-half large--one-half">
               <label class="hidden-label">{{'LABEL.WEBSITE_CONVERSION_RATE' | translate}}</label>
-              <input class="input-full" placeholder="{{'LABEL.WEBSITE_CONVERSION_RATE' | translate}}" type="number"
+              <input class="input-full" placeholder="{{'LABEL.WEBSITE_CONVERSION_RATE' | translate}}" type="number" max="100" min="0"
                      [ngClass]="{error: form.get('website.conversionRate').hasError('required') && form.get('website.conversionRate').touched}"
                      formControlName="conversionRate">
             </div>
@@ -713,4 +713,3 @@
     </form>
   </div>
 </div>
-

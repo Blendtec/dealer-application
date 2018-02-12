@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiHost: 'https://blendtec.mockable.io',
-  registrationEndpoint: 'dealerapp',
+  apiHost: 'https://www.blendtec.com',
+  dealerEndpoint: 'api/dealers/add',
   bucket: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application',
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
   assets: 'https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/dealer-application/assets',

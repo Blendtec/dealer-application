@@ -7,7 +7,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 export const APP_DI_CONFIG: AppConfig = {
   apiHost: environment.apiHost,
-  registrationEndpoint: environment.registrationEndpoint,
+  dealerEndpoint: environment.dealerEndpoint,
   captchaKey: environment.captchaKey,
   s3: environment.s3,
   assets: environment.assets,

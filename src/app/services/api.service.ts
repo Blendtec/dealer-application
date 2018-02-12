@@ -10,10 +10,6 @@ export class ApiService {
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   public post(command: ApplicationCommand): Promise<any> {
-    /* tslint:disable */
-    console.log('POSTING: ', JSON.stringify(command));
-    /* tslint:enable */
-//    return this.http.post(`${this.config.apiHost}/${this.config.registrationEndpoint}`, command, {responseType: 'text'}).toPromise();
-    return Promise.resolve();
+    return this.http.post(`${this.config.apiHost}/${this.config.dealerEndpoint}`, command, {responseType: 'text'}).toPromise();
   }
 }

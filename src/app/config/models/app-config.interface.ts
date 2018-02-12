@@ -1,6 +1,6 @@
 export interface AppConfig {
   apiHost: string;
-  registrationEndpoint: string;
+  dealerEndpoint: string;
   captchaKey: string;
   bucket: string;
   assets: string;

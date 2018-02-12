@@ -1,6 +1,6 @@
 export interface IWebsite {
   url: string;
-  date: string;
+  date: object;
   visits: number;
   conversionRate: number;
   revenue: number;

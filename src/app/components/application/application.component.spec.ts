@@ -25,28 +25,81 @@ describe('ApplicationComponent', () => {
 
   const applicationFormMock = {
     value: {
-      firstName: '',
-      lastName: '',
-      marketingOptIn: true,
-      recaptcha: '',
-      address: {
-        one: '',
-        two: '',
-        city: '',
-        state: '',
-        zip: '',
-        country: '',
+      contact: {
+        firstName: '',
+        lastName: '',
+        title: '',
         email: '',
-        phone: ''
+        phone: '',
+        individual: ''
       },
-      purchase: {
-        place: '',
-        other: ''
+      company: {
+        name: '',
+        dbas: '',
+        phone: '',
+        fax: ''
       },
-      serial: {
-        prefix: '',
-        suffix: ''
-      }
+      shippingAddress: {
+        name: '',
+        address: '',
+        city: '',
+        stateProvince: '',
+        zip: '',
+        country: ''
+      },
+      billingAddress: {
+        name: '',
+        address: '',
+        city: '',
+        stateProvince: '',
+        zip: '',
+        country: ''
+      },
+      business: {
+        license: '',
+        state: '',
+        taxExemptNum: ''
+      },
+      website: {
+        url: '',
+        date: '',
+        visits: 0,
+        conversionRate: 0,
+        revenue: 0,
+        tools: ''
+      },
+      social: {
+        facebook: { url: '', count: 0},
+        pinterest: { url: '', count: 0},
+        instagram: { url: '', count: 0},
+        twitter: { url: '', count: 0},
+        googlePlus: { url: '', count: 0},
+        blog: { url: '', count: 0}
+      },
+      sales: {
+        channels: '',
+        amazon: '',
+        amazonNames: '',
+        demos: ''
+      },
+      fulfillment: {
+       warehouseLocation: '',
+       other: '',
+       thirdPartyName: '',
+       thirdPartyLocation: '',
+       directToStore: ''
+      },
+      differentiators: {
+       how: '',
+       what: '',
+       value: ''
+      },
+      other: {
+       products: '',
+       marketing: '',
+       locations: ''
+      },
+      recaptcha: '',
     }
   };
 
@@ -107,5 +160,14 @@ describe('ApplicationComponent', () => {
         });
     });
 
+    it('should set success to true', done => {
+      applicationSvcMock.post.and.returnValue(Promise.resolve());
+
+      component.onSubmit(applicationFormMock)
+        .then(() => {
+          expect(component.success).toBe(true);
+          done();
+        });
+    });
   });
 });

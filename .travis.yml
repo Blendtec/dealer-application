@@ -26,8 +26,8 @@ script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH
 - if [ $TRAVIS_BRANCH = 'master' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_BUCKET/$APP_NAME/; fi
-- if [ $TRAVIS_BRANCH = 'stage' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_STAGE_BUCKET/$APP_NAME/; fi
-- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run env && ng build --aot --prod --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_DEV_BUCKET/$APP_NAME/; fi
+- if [ $TRAVIS_BRANCH = 'stage' ]; then npm run env && ng build --aot --environment=stage --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_STAGE_BUCKET/$APP_NAME/; fi
+- if [ $TRAVIS_BRANCH = 'develop' ]; then npm run env && ng build --aot --environment=dev --base-href /pages/$APP_NAME --deploy-url $S3_REGION/$S3_DEV_BUCKET/$APP_NAME/; fi
 after_success:
 - "./node_modules/.bin/codecov"
 deploy:

@@ -694,6 +694,7 @@
 
       </div>
       <hr/>
+      <p *ngIf="success" class="form-success text-center">{{'success' | translate}}</p>
       <div class="grid">
         <div class="grid__item large--one-half">
           <div class="captcha-input">
@@ -703,7 +704,6 @@
         </div>
         <div class="grid__item large--one-half">
           <button id="registration-submit--btn" name="button" class="step__footer__continue-btn btn"
-                  [disabled]="form.invalid"
                   type="submit">
             {{'BUTTON.APPLY' | translate}}
           </button>

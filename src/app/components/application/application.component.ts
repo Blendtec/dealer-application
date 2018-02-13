@@ -20,6 +20,7 @@ import { getTouchedControlsValidationErrors } from '../../util/get-form-validati
 })
 export class ApplicationComponent extends BaseComponent implements OnDestroy {
 
+  public success: boolean;
   public submitError= false;
   public form: FormGroup;
   public countries$: Observable<ICountry[]>;
@@ -42,6 +43,7 @@ export class ApplicationComponent extends BaseComponent implements OnDestroy {
     this.countries$ = countryService.getAll$();
     this.states$ = stateService.getAll$();
     this.createForm();
+    this.success = false;
   }
 
   private createForm(): void {
@@ -176,12 +178,11 @@ export class ApplicationComponent extends BaseComponent implements OnDestroy {
 
   public onSubmit(formData: any): Promise<any> {
     return this.apiService.post(new ApplicationCommand(formData.value))
-      .then((out) => {
+      .then(() => {
+        this.success = true;
         this.form.reset();
       })
-      .catch((out) => {
-        this.submitError = true;
-      });
+      .catch(err => this.submitError = true);
    }
 
 }

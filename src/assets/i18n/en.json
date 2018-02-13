@@ -15,7 +15,8 @@
   },
   "CONTENT": {
     "THANK_YOU": "Thank you for your interest in the Blendtec Dealer Program. Fill out the form below to begin the approval process",
-    "SOCIAL_COUNT": "Please list all social media URLs your brand operates on, with # of followers/likes/participants/visitors."
+    "SOCIAL_COUNT": "Please list all social media URLs your brand operates on, with # of followers/likes/participants/visitors.",
+    "SUCCESS": "Thank you! Your application has been received"
   },
   "LABEL": {
     "CONTACT_FIRST_NAME": "First Name",
